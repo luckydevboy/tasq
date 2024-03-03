@@ -46,7 +46,7 @@ const Header = () => {
               initial={{ right: "-75%" }}
               animate={{ right: 0 }}
               exit={{ right: "-75%" }}
-              className="absolute top-0 z-20 h-svh w-3/4 rounded-l-lg bg-white p-8 lg:hidden"
+              className="absolute top-0 z-20 h-svh w-3/4 rounded-l-lg bg-white p-4 lg:hidden"
               ref={mobileMenuRef}
             >
               <div className="flex h-full flex-col space-y-4">
