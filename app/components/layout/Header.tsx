@@ -27,7 +27,7 @@ const Header = () => {
     <>
       <header className="px-4 md:px-8 py-4 flex items-center gap-x-2 border-b border-gray-200">
         <Bars3Icon
-          className="text-gray-800 h-6 w-6 cursor-pointer"
+          className="text-gray-800 h-6 w-6 cursor-pointer md:hidden"
           onClick={() => setMobileMenu(true)}
         />
         <h1 className="font-bold text-xl text-gray-800">تسکیو</h1>

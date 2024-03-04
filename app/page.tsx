@@ -1,29 +1,29 @@
 "use client";
 
-import { ChangeEventHandler, useState } from "react";
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import { Task } from "@/app/interfaces";
+import { AddTask, TasksList } from "./components";
 
 export default function Home() {
   const [tasks, setTasks] = useState<Task[]>([]);
-  const [task, setTask] = useState("");
 
-  const handleChange = (e: ChangeEventHandler<HTMLInputElement>) => {};
+  const handleSubmit = (taskTitle: string) => {
+    setTasks([
+      {
+        title: taskTitle,
+        id: uuidv4(),
+        createdAt: new Date().toISOString(),
+        completed: false,
+      },
+      ...tasks,
+    ]);
+  };
 
   return (
     <main className="flex-grow p-4">
-      <div className="flex justify-between items-center border border-gray-200 rounded-lg p-2 gap-x-2">
-        <input
-          type="text"
-          placeholder="تسک جدیدت رو اینجا بنویس..."
-          className="flex-grow text-sm md:text-base outline-none"
-          value={task}
-          name="task"
-          onChange={handleChange}
-        />
-        <button className="text-white bg-blue-700 rounded-lg px-4 py-1 text-sm md:text-base font-semibold">
-          ثبت
-        </button>
-      </div>
+      <AddTask handleSubmit={handleSubmit} />
+      <TasksList tasks={tasks} />
     </main>
   );
 }
