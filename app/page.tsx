@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Task } from "@/app/interfaces";
 import { AddTask, TasksList } from "./components";
@@ -8,16 +8,25 @@ import { AddTask, TasksList } from "./components";
 export default function Home() {
   const [tasks, setTasks] = useState<Task[]>([]);
 
+  useEffect(() => {
+    const storedTasks = localStorage.getItem("tasks");
+    if (storedTasks) {
+      setTasks(JSON.parse(storedTasks));
+    }
+  }, []);
+
   const handleSubmit = (taskTitle: string) => {
-    setTasks([
-      {
-        title: taskTitle,
-        id: uuidv4(),
-        createdAt: new Date().toISOString(),
-        completed: false,
-      },
-      ...tasks,
-    ]);
+    const newTask = {
+      title: taskTitle,
+      id: uuidv4(),
+      createdAt: new Date().toISOString(),
+      completed: false,
+    };
+
+    const newTasks = [newTask, ...tasks];
+
+    localStorage.setItem("tasks", JSON.stringify(newTasks));
+    setTasks(newTasks);
   };
 
   return (
