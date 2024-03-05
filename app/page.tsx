@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { Task } from "@/app/interfaces";
 import { AddTask, TasksList } from "./components";
 
-export default function Home() {
+const Home = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
 
   useEffect(() => {
@@ -35,4 +35,6 @@ export default function Home() {
       <TasksList tasks={tasks} />
     </main>
   );
-}
+};
+
+export default Home;
