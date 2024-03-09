@@ -1,13 +1,13 @@
 "use client";
 
 import { ChangeEvent, FormEvent, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
-type Props = {
-  handleSubmit: (taskTitle: string) => void;
-};
+import { useTasksContext } from "../contexts";
 
-const AddTask = ({ handleSubmit }: Props) => {
+const AddTask = () => {
   const [taskTitle, setTaskTitle] = useState("");
+  const { tasks, setTasks } = useTasksContext();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTaskTitle(e.target.value);
@@ -16,7 +16,18 @@ const AddTask = ({ handleSubmit }: Props) => {
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setTaskTitle("");
-    handleSubmit(taskTitle);
+
+    const newTask = {
+      title: taskTitle,
+      id: uuidv4(),
+      createdAt: new Date().toISOString(),
+      completed: false,
+    };
+
+    const newTasks = [newTask, ...tasks];
+
+    localStorage.setItem("tasks", JSON.stringify(newTasks));
+    setTasks(newTasks);
   };
 
   return (

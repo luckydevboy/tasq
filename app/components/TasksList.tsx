@@ -1,11 +1,20 @@
+"use client";
+
+import { useEffect } from "react";
+
 import { Task } from ".";
-import { Task as ITask } from "../interfaces";
+import { useTasksContext } from "../contexts";
 
-type Props = {
-  tasks: ITask[];
-};
+const TasksList = () => {
+  const { tasks, setTasks } = useTasksContext();
 
-const TasksList = ({ tasks }: Props) => {
+  useEffect(() => {
+    const storedTasks = localStorage.getItem("tasks");
+    if (storedTasks) {
+      setTasks(JSON.parse(storedTasks));
+    }
+  }, []);
+
   return (
     <div className="space-y-4 my-4">
       {tasks.map((task) => (

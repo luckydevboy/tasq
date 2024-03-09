@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
 import { Layout } from "@/app/components";
+import { TasksProvider } from "./contexts";
 
 const dana = localFont({
   src: "./dana.woff2",
@@ -21,7 +22,9 @@ export default function RootLayout({
   return (
     <html lang="fa" dir="rtl">
       <body className={dana.className}>
-        <Layout>{children}</Layout>
+        <TasksProvider>
+          <Layout>{children}</Layout>
+        </TasksProvider>
       </body>
     </html>
   );
