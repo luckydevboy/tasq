@@ -2,12 +2,14 @@
 
 import { useEffect } from "react";
 
-import { Task } from ".";
+import { Task } from "../components";
 import { useTasksContext } from "../contexts";
 
-const TasksList = () => {
+// TODO: Maybe better to use TasksList component
+const CompletedPage = () => {
   const { tasks, setTasks } = useTasksContext();
 
+  // TODO: put it in the context
   useEffect(() => {
     const storedTasks = localStorage.getItem("tasks");
     if (storedTasks) {
@@ -16,9 +18,9 @@ const TasksList = () => {
   }, []);
 
   return (
-    <div className="space-y-4 mt-4">
+    <div className="space-y-4 py-6 px-4">
       {tasks
-        .filter((task) => !task.completed)
+        .filter((task) => task.completed)
         .map((task) => (
           <Task key={task.id} task={task} />
         ))}
@@ -26,4 +28,4 @@ const TasksList = () => {
   );
 };
 
-export default TasksList;
+export default CompletedPage;

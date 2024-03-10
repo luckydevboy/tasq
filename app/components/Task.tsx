@@ -24,6 +24,7 @@ const Task = ({ task }: Props) => {
     });
 
     setTasks(updatedTasks);
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
     setCompleted(!completed);
   };
 
