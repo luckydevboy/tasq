@@ -3,7 +3,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-import { useTasksContext } from "../contexts";
+import { useTasksContext } from "@/contexts";
 
 const AddTask = () => {
   const [taskTitle, setTaskTitle] = useState("");

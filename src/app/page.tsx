@@ -1,4 +1,4 @@
-import { AddTask, TasksList } from "./components";
+import { AddTask, TasksList } from "../components";
 
 const Home = () => {
   return (

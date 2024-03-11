@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
-import { Layout } from "@/app/components";
-import { TasksProvider } from "./contexts";
+import { TasksProvider } from "@/contexts";
+import { Layout } from "@/components";
 
 const dana = localFont({
   src: "./dana.woff2",

@@ -2,8 +2,8 @@
 
 import { useEffect } from "react";
 
-import { Task } from ".";
-import { useTasksContext } from "../contexts";
+import { Task } from "./index";
+import { useTasksContext } from "@/contexts";
 
 const TasksList = () => {
   const { tasks, setTasks } = useTasksContext();

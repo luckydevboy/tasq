@@ -2,8 +2,8 @@
 
 import { useEffect } from "react";
 
-import { Task } from "../components";
-import { useTasksContext } from "../contexts";
+import { Task } from "../../components";
+import { useTasksContext } from "@/contexts";
 
 // TODO: Maybe better to use TasksList component
 const CompletedPage = () => {
