@@ -7,7 +7,6 @@ import {
   MapPinIcon,
   RectangleStackIcon,
   SpeakerXMarkIcon,
-  StarIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
 import { cx } from "class-variance-authority";
@@ -16,7 +15,6 @@ import { usePathname } from "next/navigation";
 
 const Sidebar = () => {
   const pathname = usePathname();
-  console.log(pathname);
 
   return (
     <aside className="hidden md:block p-4 space-y-4 w-64 border-l border-gray-200 h-[calc(100svh-65px)]">
