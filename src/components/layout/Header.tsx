@@ -54,7 +54,7 @@ const Header = () => {
             >
               <div className="flex h-full flex-col space-y-4">
                 <Link
-                  href="/public"
+                  href="/"
                   onClick={() => setMobileMenu(false)}
                   className={cx([
                     "flex items-center gap-x-2 hover:bg-blue-50 group px-4 py-2 rounded-lg",
