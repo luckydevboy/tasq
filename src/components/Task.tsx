@@ -2,10 +2,11 @@
 
 import { CheckIcon } from "@heroicons/react/24/outline";
 import { cx } from "class-variance-authority";
+import { useState } from "react";
 
 import { Task } from "../interfaces";
-import { useTasksContext } from "../contexts";
-import { useState } from "react";
+import { useTasksContext } from "@/contexts";
+import { EditTask } from "@/components/index";
 
 type Props = {
   task: Task;
@@ -14,6 +15,7 @@ type Props = {
 const Task = ({ task }: Props) => {
   const { tasks, setTasks } = useTasksContext();
   const [completed, setCompleted] = useState(task.completed);
+  const [editTaskModalIsOpen, setEditTaskModalIsOpen] = useState(false);
 
   const handleComplete = () => {
     const updatedTasks = tasks.map((t) => {
@@ -41,9 +43,20 @@ const Task = ({ task }: Props) => {
           className="w-4 h-4 rounded-full border-2 border-blue-700 cursor-pointer"
         ></span>
       )}
-      <span className={cx(task.completed && "line-through text-black/60")}>
+      <div
+        className={cx(
+          "cursor-pointer",
+          task.completed && "line-through text-black/60",
+        )}
+        onClick={() => setEditTaskModalIsOpen(true)}
+      >
         {task.title}
-      </span>
+      </div>
+
+      <EditTask
+        isOpen={editTaskModalIsOpen}
+        handleClose={() => setEditTaskModalIsOpen(false)}
+      />
     </div>
   );
 };
