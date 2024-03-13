@@ -44,10 +44,7 @@ const AddTask = () => {
         value={taskTitle}
         onChange={handleChange}
       />
-      <button
-        disabled={!taskTitle}
-        className="text-white bg-blue-700 disabled:bg-blue-300 hover:bg-blue-500 rounded-lg px-4 py-1  md:text-base font-semibold"
-      >
+      <button disabled={!taskTitle} className="btn-primary-solid">
         ثبت
       </button>
     </form>

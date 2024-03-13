@@ -74,7 +74,7 @@ const EditTaskModal = ({ isOpen, handleClose, task }: Props) => {
         {...register("dueDate")}
       />
       <textarea
-        className="input self-stretch"
+        className="input self-stretch resize-none"
         placeholder="توضیحات"
         {...register("description")}
       />
@@ -82,22 +82,20 @@ const EditTaskModal = ({ isOpen, handleClose, task }: Props) => {
         <div className="flex gap-x-2 items-center">
           <button
             onClick={handleDelete}
-            className="flex items-center gap-x-1 hover:bg-red-100 rounded-lg p-2"
+            className="flex items-center gap-x-1 btn-danger-outline"
           >
             <TrashIcon className="text-red-700 w-4 h-4" />
             <div className="text-red-700 ">حذف</div>
           </button>
           <button
             onClick={handleComplete}
-            className="flex items-center gap-x-1 hover:bg-green-100 rounded-lg p-2"
+            className="flex items-center gap-x-1 btn-success-outline"
           >
             <CheckIcon className="text-green-700 w-4 h-4" />
             <div className="text-green-700 ">تکمیل</div>
           </button>
         </div>
-        <button className="bg-blue-700 hover:bg-blue-500 rounded-lg p-2 text-white ">
-          ویرایش
-        </button>
+        <button className="btn-primary-solid">ویرایش</button>
       </div>
     </Modal>
   );
