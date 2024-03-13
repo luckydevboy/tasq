@@ -3,12 +3,10 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-import { useTasksContext } from "@/contexts";
 import { Task } from "@/interfaces";
 
 const AddTask = () => {
   const [taskTitle, setTaskTitle] = useState("");
-  const { tasks, setTasks } = useTasksContext();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTaskTitle(e.target.value);
@@ -26,10 +24,7 @@ const AddTask = () => {
       deleted: false,
     };
 
-    const newTasks = [newTask, ...tasks];
-
-    localStorage.setItem("tasks", JSON.stringify(newTasks));
-    setTasks(newTasks);
+    // TODO: Call API for creating a new task
   };
 
   return (

@@ -5,31 +5,19 @@ import { cx } from "class-variance-authority";
 import { useState } from "react";
 
 import { Task } from "../interfaces";
-import { useTasksContext } from "@/contexts";
 import { EditTaskModal } from "@/components";
-import { title } from "process";
 
 type Props = {
   task: Task;
 };
 
 const Task = ({ task }: Props) => {
-  const { tasks, setTasks } = useTasksContext();
   const [completed, setCompleted] = useState(task.completed);
   const [editTaskModalIsOpen, setEditTaskModalIsOpen] = useState(false);
 
   // TODO: make a util or put it in the context
   const handleComplete = () => {
-    const updatedTasks = tasks.map((t) => {
-      if (t.id === task.id) {
-        return { ...t, completed: !t.completed };
-      }
-      return t;
-    });
-
-    setTasks(updatedTasks);
-    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
-    setCompleted(!completed);
+    // TODO: call api + update state
   };
 
   return (

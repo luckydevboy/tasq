@@ -1,27 +1,21 @@
 "use client";
 
-import { useEffect } from "react";
-
-import { Task } from "./index";
-import { useTasksContext } from "@/contexts";
+import { Task } from "./";
+import { useGetTasks } from "@/api/hooks";
 
 const TasksList = () => {
-  const { tasks, setTasks } = useTasksContext();
+  const { data, isLoading } = useGetTasks();
 
-  useEffect(() => {
-    const storedTasks = localStorage.getItem("tasks");
-    if (storedTasks) {
-      setTasks(JSON.parse(storedTasks));
-    }
-  }, []);
+  const tasks = data?.pages.reduce(
+    (acc: Task[], page) => acc.concat(page.data.data.tasks),
+    [],
+  );
 
   return (
     <div className="space-y-4 mt-4">
       {tasks
-        .filter((task) => !task.completed)
-        .map((task) => (
-          <Task key={task.id} task={task} />
-        ))}
+        ?.filter((task) => !task.completed)
+        .map((task) => <Task key={task.id} task={task} />)}
     </div>
   );
 };
