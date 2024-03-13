@@ -19,7 +19,7 @@ const Sidebar = () => {
   return (
     <aside className="hidden md:block p-4 space-y-4 w-64 border-l border-gray-200 h-[calc(100svh-65px)]">
       <Link
-        href="/public"
+        href="/"
         className={cx([
           "flex items-center gap-x-2 hover:bg-blue-50 group px-4 py-2 rounded-lg",
           pathname === "/" && "bg-blue-50",

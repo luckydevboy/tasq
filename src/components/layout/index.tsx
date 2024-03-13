@@ -1,8 +1,10 @@
+import { ReactNode } from "react";
+
 import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
 
 type Props = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 const Layout = ({ children }: Props) => {
