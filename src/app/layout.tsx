@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import { ReactNode } from "react";
 import localFont from "next/font/local";
-import { TasksProvider } from "@/contexts";
+
+import "./globals.css";
 import { Layout } from "@/components";
+import { ReactQueryProvider } from "@/providers";
 
 const dana = localFont({
   src: "./dana.woff2",
@@ -17,14 +19,14 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="fa" dir="rtl">
       <body className={dana.className}>
-        <TasksProvider>
+        <ReactQueryProvider>
           <Layout>{children}</Layout>
-        </TasksProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );

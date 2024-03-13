@@ -1,29 +1,22 @@
 "use client";
 
-import { useEffect } from "react";
-
-import { Task } from "../../components";
-import { useTasksContext } from "@/contexts";
+import { Task } from "@/components";
+import { useGetTasks } from "@/api/hooks";
 
 // TODO: Maybe better to use TasksList component
 const CompletedPage = () => {
-  const { tasks, setTasks } = useTasksContext();
+  const { data, isLoading } = useGetTasks();
 
-  // TODO: put it in the context
-  useEffect(() => {
-    const storedTasks = localStorage.getItem("tasks");
-    if (storedTasks) {
-      setTasks(JSON.parse(storedTasks));
-    }
-  }, []);
+  const tasks = data?.pages.reduce(
+    (acc: Task[], page) => acc.concat(page.data.data.tasks),
+    [],
+  );
 
   return (
     <div className="space-y-4 py-6 px-4">
       {tasks
-        .filter((task) => task.completed)
-        .map((task) => (
-          <Task key={task.id} task={task} />
-        ))}
+        ?.filter((task) => task.completed)
+        .map((task) => <Task key={task.id} task={task} />)}
     </div>
   );
 };

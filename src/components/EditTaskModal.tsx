@@ -1,10 +1,10 @@
 "use client";
 
-import { Modal } from "@/components";
 import { SubmitHandler, useForm } from "react-hook-form";
+
 import { Task } from "@/interfaces";
+import { Modal } from "@/components";
 import { CheckIcon, TrashIcon } from "@heroicons/react/24/outline";
-import { useTasksContext } from "@/contexts";
 
 type Props = {
   isOpen: boolean;
@@ -22,35 +22,16 @@ const EditTaskModal = ({ isOpen, handleClose, task }: Props) => {
     reset,
     formState: { errors },
   } = useForm<TaskModify>({ defaultValues: { title: task.title } });
-  const { tasks, setTasks } = useTasksContext();
 
   const onSubmit: SubmitHandler<TaskModify> = (data) => console.log(data);
 
-  // TODO: make a util or put it in the context
   const handleComplete = () => {
-    const updatedTasks = tasks.map((t) => {
-      if (t.id === task.id) {
-        return { ...t, completed: !t.completed };
-      }
-      return t;
-    });
-
-    setTasks(updatedTasks);
-    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+    // TODO: update task
     handleClose();
   };
 
-  // TODO: make a util or put it in the context
   const handleDelete = () => {
-    const updatedTasks = tasks.map((t) => {
-      if (t.id === task.id) {
-        return { ...t, deleted: !t.deleted };
-      }
-      return t;
-    });
-
-    setTasks(updatedTasks);
-    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+    // TODO: delete task
     handleClose();
   };
 
