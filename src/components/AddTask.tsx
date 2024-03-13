@@ -4,6 +4,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import { useTasksContext } from "@/contexts";
+import { Task } from "@/interfaces";
 
 const AddTask = () => {
   const [taskTitle, setTaskTitle] = useState("");
@@ -17,11 +18,12 @@ const AddTask = () => {
     e.preventDefault();
     setTaskTitle("");
 
-    const newTask = {
+    const newTask: Task = {
       title: taskTitle,
       id: uuidv4(),
-      createdAt: new Date().toISOString(),
+      dueDate: new Date().toISOString(),
       completed: false,
+      deleted: false,
     };
 
     const newTasks = [newTask, ...tasks];
