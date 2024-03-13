@@ -3,23 +3,56 @@
 import { Modal } from "@/components";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Task } from "@/interfaces";
-import { useState } from "react";
+import { CheckIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { useTasksContext } from "@/contexts";
 
 type Props = {
   isOpen: boolean;
   handleClose: () => void;
-};
+} & { task: Task };
 
 type TaskModify = Omit<Task, "id">;
 
-const EditTaskModal = ({ isOpen, handleClose }: Props) => {
+const EditTaskModal = ({ isOpen, handleClose, task }: Props) => {
   const {
     register,
     handleSubmit,
     watch,
+    setValue,
+    reset,
     formState: { errors },
-  } = useForm<TaskModify>();
+  } = useForm<TaskModify>({ defaultValues: { title: task.title } });
+  const { tasks, setTasks } = useTasksContext();
+
   const onSubmit: SubmitHandler<TaskModify> = (data) => console.log(data);
+
+  // TODO: make a util or put it in the context
+  const handleComplete = () => {
+    const updatedTasks = tasks.map((t) => {
+      if (t.id === task.id) {
+        return { ...t, completed: !t.completed };
+      }
+      return t;
+    });
+
+    setTasks(updatedTasks);
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+    handleClose();
+  };
+
+  // TODO: make a util or put it in the context
+  const handleDelete = () => {
+    const updatedTasks = tasks.map((t) => {
+      if (t.id === task.id) {
+        return { ...t, deleted: !t.deleted };
+      }
+      return t;
+    });
+
+    setTasks(updatedTasks);
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+    handleClose();
+  };
 
   return (
     <Modal
@@ -45,6 +78,27 @@ const EditTaskModal = ({ isOpen, handleClose }: Props) => {
         placeholder="توضیحات"
         {...register("description")}
       />
+      <div className="flex justify-between">
+        <div className="flex gap-x-2 items-center">
+          <button
+            onClick={handleDelete}
+            className="flex items-center gap-x-1 hover:bg-red-100 rounded-lg p-2"
+          >
+            <TrashIcon className="text-red-700 w-4 h-4" />
+            <div className="text-red-700 ">حذف</div>
+          </button>
+          <button
+            onClick={handleComplete}
+            className="flex items-center gap-x-1 hover:bg-green-100 rounded-lg p-2"
+          >
+            <CheckIcon className="text-green-700 w-4 h-4" />
+            <div className="text-green-700 ">تکمیل</div>
+          </button>
+        </div>
+        <button className="bg-blue-700 hover:bg-blue-500 rounded-lg p-2 text-white ">
+          ویرایش
+        </button>
+      </div>
     </Modal>
   );
 };

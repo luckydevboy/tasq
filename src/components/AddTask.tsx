@@ -38,11 +38,14 @@ const AddTask = () => {
       <input
         type="text"
         placeholder="تسک جدیدت رو اینجا بنویس..."
-        className="flex-grow text-sm md:text-base outline-none"
+        className="flex-grow  md:text-base outline-none"
         value={taskTitle}
         onChange={handleChange}
       />
-      <button className="text-white bg-blue-700 rounded-lg px-4 py-1 text-sm md:text-base font-semibold">
+      <button
+        disabled={!taskTitle}
+        className="text-white bg-blue-700 disabled:bg-blue-300 hover:bg-blue-500 rounded-lg px-4 py-1  md:text-base font-semibold"
+      >
         ثبت
       </button>
     </form>
