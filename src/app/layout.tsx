@@ -3,8 +3,7 @@ import { ReactNode } from "react";
 import localFont from "next/font/local";
 
 import "./globals.css";
-import { Layout } from "@/components";
-import { ReactQueryProvider } from "@/providers";
+import { NextAuthSessionProvider, ReactQueryProvider } from "@/providers";
 
 const dana = localFont({
   src: "./dana.woff2",
@@ -24,9 +23,9 @@ export default function RootLayout({
   return (
     <html lang="fa" dir="rtl">
       <body className={dana.className}>
-        <ReactQueryProvider>
-          <Layout>{children}</Layout>
-        </ReactQueryProvider>
+        <NextAuthSessionProvider>
+          <ReactQueryProvider>{children}</ReactQueryProvider>
+        </NextAuthSessionProvider>
       </body>
     </html>
   );

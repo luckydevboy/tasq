@@ -1,12 +1,5 @@
-import { AddTask, TasksList } from "../components";
-
 const Home = () => {
-  return (
-    <main className="flex-grow p-4">
-      <AddTask />
-      <TasksList />
-    </main>
-  );
+  return <p>این صفحه لندینگ!</p>;
 };
 
 export default Home;

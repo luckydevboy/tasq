@@ -22,7 +22,7 @@ const Sidebar = () => {
         href="/"
         className={cx([
           "flex items-center gap-x-2 hover:bg-blue-50 group px-4 py-2 rounded-lg",
-          pathname === "/" && "bg-blue-50",
+          pathname === "/tasks" && "bg-blue-50",
         ])}
       >
         <RectangleStackIcon className="text-gray-800 w-6 h-6 group-hover:text-blue-700" />
