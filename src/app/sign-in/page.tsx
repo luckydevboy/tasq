@@ -1,9 +1,15 @@
 "use client";
 
+import { Suspense } from "react";
+
 import { AuthForm } from "@/components";
 
 const SignIn = () => {
-  return <AuthForm type="signIn" />;
+  return (
+    <Suspense>
+      <AuthForm type="signIn" />
+    </Suspense>
+  );
 };
 
 export default SignIn;

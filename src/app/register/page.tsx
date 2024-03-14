@@ -1,9 +1,15 @@
 "use client";
 
+import { Suspense } from "react";
+
 import { AuthForm } from "@/components";
 
 const Register = () => {
-  return <AuthForm type="register" />;
+  return (
+    <Suspense>
+      <AuthForm type="register" />
+    </Suspense>
+  );
 };
 
 export default Register;
