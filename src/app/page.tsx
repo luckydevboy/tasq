@@ -1,5 +1,8 @@
+import { redirect } from "next/navigation";
+
 const Home = () => {
-  return <p>این صفحه لندینگ!</p>;
+  redirect("/tasks");
+  return <></>;
 };
 
 export default Home;
