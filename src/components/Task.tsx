@@ -3,9 +3,11 @@
 import { CheckIcon } from "@heroicons/react/24/outline";
 import { cx } from "class-variance-authority";
 import { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { Task } from "../interfaces";
 import { EditTaskModal } from "@/components";
+import { useUpdateTask } from "@/api/hooks";
 
 type Props = {
   task: Task;
@@ -14,10 +16,16 @@ type Props = {
 const Task = ({ task }: Props) => {
   const [completed, setCompleted] = useState(task.completed);
   const [editTaskModalIsOpen, setEditTaskModalIsOpen] = useState(false);
+  const queryClient = useQueryClient();
+  const updateTask = useUpdateTask();
 
   // TODO: make a util or put it in the context
-  const handleComplete = () => {
-    // TODO: call api + update state
+  const handleComplete = async () => {
+    await updateTask.mutateAsync({
+      task: { completed: true },
+      taskId: task._id,
+    });
+    queryClient.invalidateQueries({ queryKey: ["tasks"] });
   };
 
   return (

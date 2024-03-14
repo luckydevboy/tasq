@@ -1,6 +1,6 @@
 export default interface Task {
   title: string;
-  id: string;
+  _id: string;
   completed: boolean;
   deleted: boolean;
   dueDate?: string;

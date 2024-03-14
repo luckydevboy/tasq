@@ -1,10 +1,12 @@
 "use client";
 
 import { SubmitHandler, useForm } from "react-hook-form";
+import { CheckIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { Task } from "@/interfaces";
 import { Modal } from "@/components";
-import { CheckIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { useDeleteTask, useUpdateTask } from "@/api/hooks";
 
 type Props = {
   isOpen: boolean;
@@ -22,16 +24,28 @@ const EditTaskModal = ({ isOpen, handleClose, task }: Props) => {
     reset,
     formState: { errors },
   } = useForm<TaskModify>({ defaultValues: { title: task.title } });
+  const updateTask = useUpdateTask();
+  const deleteTask = useDeleteTask();
+  const queryClient = useQueryClient();
 
   const onSubmit: SubmitHandler<TaskModify> = (data) => console.log(data);
 
-  const handleComplete = () => {
-    // TODO: update task
+  const handleComplete = async () => {
+    // TODO: Handle errors
+    await updateTask.mutateAsync({
+      task: { completed: true },
+      taskId: task._id,
+    });
+    queryClient.invalidateQueries({ queryKey: ["tasks"] });
+    // TODO: show toast
     handleClose();
   };
 
-  const handleDelete = () => {
-    // TODO: delete task
+  const handleDelete = async () => {
+    // TODO: Handle errors
+    await deleteTask.mutateAsync(task._id);
+    queryClient.invalidateQueries({ queryKey: ["tasks"] });
+    // TODO: show toast
     handleClose();
   };
 
