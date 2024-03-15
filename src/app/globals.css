@@ -6,16 +6,4 @@
   .input {
     @apply outline-none border border-gray-200 rounded-lg p-3;
   }
-
-  .btn-primary-solid {
-    @apply bg-blue-700 hover:bg-blue-500 rounded-lg px-4 py-2 text-white font-semibold text-sm disabled:bg-blue-200;
-  }
-
-  .btn-success-outline {
-    @apply bg-green-50 hover:bg-green-100 rounded-lg px-4 py-2 text-green-700 font-semibold text-sm;
-  }
-
-  .btn-danger-outline {
-    @apply bg-red-50 hover:bg-red-100 rounded-lg px-4 py-2 text-red-700 font-semibold text-sm;
-  }
 }
