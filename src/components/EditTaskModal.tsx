@@ -5,7 +5,7 @@ import { CheckIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { Task } from "@/interfaces";
-import { Modal } from "@/components";
+import { Button, Modal } from "@/components";
 import { useDeleteTask, useUpdateTask } from "@/api/hooks";
 
 type Props = {
@@ -75,22 +75,32 @@ const EditTaskModal = ({ isOpen, handleClose, task }: Props) => {
       />
       <div className="flex justify-between">
         <div className="flex gap-x-2 items-center">
-          <button
+          <Button
+            variant="outlined"
+            color="danger"
             onClick={handleDelete}
-            className="flex items-center gap-x-1 btn-danger-outline"
+            isLoading={deleteTask.isPending}
           >
-            <TrashIcon className="text-red-700 w-4 h-4" />
-            <div className="text-red-700 ">حذف</div>
-          </button>
-          <button
+            <span className="flex items-center gap-x-1">
+              <TrashIcon className="text-red-700 w-4 h-4" />
+              حذف
+            </span>
+          </Button>
+          <Button
+            variant="outlined"
+            color="success"
             onClick={handleComplete}
-            className="flex items-center gap-x-1 btn-success-outline"
+            isLoading={updateTask.isPending}
           >
-            <CheckIcon className="text-green-700 w-4 h-4" />
-            <div className="text-green-700 ">تکمیل</div>
-          </button>
+            <span className="flex items-center gap-x-1">
+              <CheckIcon className="text-green-700 w-4 h-4" />
+              تکمیل
+            </span>
+          </Button>
         </div>
-        <button className="btn-primary-solid">ویرایش</button>
+        <Button variant="contained" color="primary">
+          ویرایش
+        </Button>
       </div>
     </Modal>
   );
