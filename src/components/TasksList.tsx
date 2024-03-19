@@ -1,10 +1,13 @@
 "use client";
 
+import { Filter } from "@/interfaces";
 import { Task } from "./";
 import { useGetTasks } from "@/api/hooks";
 
-const TasksList = () => {
-  const { data: tasks, isFetching } = useGetTasks();
+type Props = { filter?: Filter };
+
+const TasksList = ({ filter }: Props) => {
+  const { data: tasks, isFetching } = useGetTasks(filter);
 
   return (
     <>

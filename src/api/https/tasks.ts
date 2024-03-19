@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 
-import { Task } from "@/interfaces";
+import { Filter, Task } from "@/interfaces";
 import { axios } from "@/api/axiosInstance";
 
 // export const getTasks = async ({
@@ -18,10 +18,10 @@ import { axios } from "@/api/axiosInstance";
 //   return axios.get("/tasks", { params: { page, pageSize } });
 // };
 
-export const getTasks = async (): Promise<
-  AxiosResponse<{ status: string; data: { tasks: Task[] } }>
-> => {
-  return axios.get("/tasks");
+export const getTasks = async (
+  filter?: Filter,
+): Promise<AxiosResponse<{ status: string; data: { tasks: Task[] } }>> => {
+  return axios.get(`/tasks/${filter ?? ""}`);
 };
 
 export const createTask = async (title: string) => {

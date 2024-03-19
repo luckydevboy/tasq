@@ -1,6 +1,6 @@
 import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query";
 import { createTask, deleteTask, getTasks, updateTask } from "@/api/https";
-import { Task } from "@/interfaces";
+import { Filter, Task } from "@/interfaces";
 
 // export const useGetTasks = () => {
 //   const pageSize = 10;
@@ -25,10 +25,10 @@ import { Task } from "@/interfaces";
 //   });
 // };
 
-export const useGetTasks = () => {
+export const useGetTasks = (filter?: Filter) => {
   return useQuery({
     queryKey: ["tasks"],
-    queryFn: getTasks,
+    queryFn: () => getTasks(filter),
     select: (res) => res.data.data.tasks,
   });
 };
