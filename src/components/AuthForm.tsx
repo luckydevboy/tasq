@@ -150,7 +150,7 @@ const AuthForm = ({ type }: Props) => {
             </div>
           </form>
           {error === "CredentialsSignin" ? (
-            <div className="text-coquelicot mt-2 text-sm">
+            <div className="text-red-500 mt-2 text-sm">
               نام کاربری یا رمز عبور اشتباه است!
             </div>
           ) : (

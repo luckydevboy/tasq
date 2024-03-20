@@ -3,6 +3,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { CheckIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 import { Task } from "@/interfaces";
 import { Button, Modal } from "@/components";
@@ -12,7 +13,6 @@ import {
   useUnCompleteTask,
   useUpdateTask,
 } from "@/api/hooks";
-import toast from "react-hot-toast";
 
 type Props = {
   isOpen: boolean;
@@ -25,12 +25,8 @@ const EditTaskModal = ({ isOpen, handleClose, task }: Props) => {
   const {
     register,
     handleSubmit,
-    watch,
-    setValue,
-    reset,
-    getValues,
     formState: { errors },
-  } = useForm<TaskModify>({ defaultValues: { title: task.title } });
+  } = useForm<TaskModify>({ defaultValues: task });
   const updateTask = useUpdateTask();
   const deleteTask = useDeleteTask();
   const completeTask = useCompleteTask();
@@ -39,7 +35,7 @@ const EditTaskModal = ({ isOpen, handleClose, task }: Props) => {
 
   const onSubmit: SubmitHandler<TaskModify> = async (data) => {
     try {
-      await updateTask.mutateAsync({ taskId: data._id, task: data });
+      await updateTask.mutateAsync({ taskId: task._id, task: data });
       toast.success("تسک با موفقیت ویرایش شد.");
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
       handleClose();
@@ -81,18 +77,25 @@ const EditTaskModal = ({ isOpen, handleClose, task }: Props) => {
         className="grid grid-cols-1 gap-4"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <input
-          type="text"
-          placeholder="عنوان"
-          {...register("title")}
-          className="input"
-        />
-        <input
-          className="input"
-          type="text"
-          placeholder="سررسید"
-          {...register("dueDate")}
-        />
+        <div>
+          <input
+            type="text"
+            placeholder="عنوان"
+            {...register("title", { required: "عنوان اجباری است!" })}
+            className="input"
+          />
+          {errors.title && (
+            <small className="text-red-500">{errors.title.message}</small>
+          )}
+        </div>
+        <div>
+          <input
+            className="input"
+            type="text"
+            placeholder="سررسید"
+            {...register("dueDate")}
+          />
+        </div>
         <textarea
           className="input self-stretch resize-none"
           placeholder="توضیحات"
@@ -125,7 +128,12 @@ const EditTaskModal = ({ isOpen, handleClose, task }: Props) => {
               </span>
             </Button>
           </div>
-          <Button variant="contained" color="primary" type="submit">
+          <Button
+            variant="contained"
+            color="primary"
+            type="submit"
+            isLoading={updateTask.isPending}
+          >
             ویرایش
           </Button>
         </div>
