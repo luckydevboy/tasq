@@ -32,8 +32,6 @@ export const updateTask = async (
   task: Partial<Omit<Task, "_id">>,
   taskId: string,
 ) => {
-  console.log(task);
-
   return axios.put(`/tasks/${taskId}`, task);
 };
 

@@ -39,7 +39,7 @@ export const useCreateTask = () => {
   });
 };
 
-export const useDeleteTask = () => {
+export const useDeletePermanentlyTask = () => {
   return useMutation({
     mutationFn: (taskId: string) => deleteTask(taskId),
   });
@@ -49,5 +49,23 @@ export const useUpdateTask = () => {
   return useMutation({
     mutationFn: (data: { task: Partial<Omit<Task, "_id">>; taskId: string }) =>
       updateTask(data.task, data.taskId),
+  });
+};
+
+export const useDeleteTask = () => {
+  return useMutation({
+    mutationFn: (taskId: string) => updateTask({ deleted: true }, taskId),
+  });
+};
+
+export const useCompleteTask = () => {
+  return useMutation({
+    mutationFn: (taskId: string) => updateTask({ completed: true }, taskId),
+  });
+};
+
+export const useUnCompleteTask = () => {
+  return useMutation({
+    mutationFn: (taskId: string) => updateTask({ completed: false }, taskId),
   });
 };

@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 
 import "./globals.css";
 import { NextAuthSessionProvider, ReactQueryProvider } from "@/providers";
+import { Toaster } from "react-hot-toast";
 
 const dana = localFont({
   src: "./dana.woff2",
@@ -24,7 +25,10 @@ export default function RootLayout({
     <html lang="fa" dir="rtl">
       <body className={dana.className}>
         <NextAuthSessionProvider>
-          <ReactQueryProvider>{children}</ReactQueryProvider>
+          <ReactQueryProvider>
+            {children}
+            <Toaster />
+          </ReactQueryProvider>
         </NextAuthSessionProvider>
       </body>
     </html>
