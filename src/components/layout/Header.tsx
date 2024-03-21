@@ -33,7 +33,7 @@ const Header = () => {
           className="text-gray-800 h-6 w-6 cursor-pointer md:hidden"
           onClick={() => setMobileMenu(true)}
         />
-        <h1 className="font-bold text-xl text-gray-800">تسکیو</h1>
+        <h1 className="font-bold text-xl text-blue-700">تسکیو</h1>
       </header>
 
       <AnimatePresence>
