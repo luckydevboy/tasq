@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
 
 import { useRegister } from "@/api/hooks/auth";
+import { Button } from "@/components/ui";
 
 type Props = {
   type: "signIn" | "register";
@@ -21,8 +22,22 @@ const AuthForm = ({ type }: Props) => {
   const callbackUrl = params.get("callbackUrl") || "/";
   const register = useRegister();
   const [error, setError] = useState(params.get("error") || "");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const renderError = (error: string) => {
+    switch (error) {
+      case "CredentialsSignin":
+        return "نام کاربری یا رمز عبور اشتباه است!";
+      case "User already exists":
+        return "این کاربر در حال حاضر ثبت نام کرده است!";
+      default:
+        return error;
+    }
+  };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    setIsLoading(true);
+
     const urlObj = new URL(window.location.href);
     urlObj.searchParams.delete("error");
 
@@ -39,6 +54,8 @@ const AuthForm = ({ type }: Props) => {
       });
     } catch (error: any) {
       setError(error.response.data.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -141,21 +158,16 @@ const AuthForm = ({ type }: Props) => {
             </div>
 
             <div>
-              <button
+              <Button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-blue-700 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-vistaBlue focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700 disabled:bg-blue-700/40"
+                className="w-full flex justify-center"
+                isLoading={isLoading}
               >
                 {type === "signIn" ? "ورود" : "ثبت نام"}
-              </button>
+              </Button>
             </div>
           </form>
-          {error === "CredentialsSignin" ? (
-            <div className="text-red-500 mt-2 text-sm">
-              نام کاربری یا رمز عبور اشتباه است!
-            </div>
-          ) : (
-            error && <div className="text-coquelicot mt-2 text-sm">{error}</div>
-          )}
+          <div className="text-red-500 mt-2 text-sm">{renderError(error)}</div>
 
           <p className="mt-10 text-center text-sm text-davysGray">
             {type === "signIn" ? "هنوز ثبت نام نکردی؟" : "قبلا ثبت نام کردی؟"}{" "}
