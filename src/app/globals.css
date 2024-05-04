@@ -9,3 +9,7 @@
     @apply outline-none border border-gray-200 rounded-lg p-3 w-full;
   }
 }
+
+.rdp__modal {
+  z-index: 110 !important;
+}

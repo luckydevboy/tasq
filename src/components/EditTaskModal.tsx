@@ -1,11 +1,13 @@
 "use client";
 
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm, Controller } from "react-hook-form";
 import { CheckIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import Drawer from "react-modern-drawer";
 import { useMediaQuery } from "react-responsive";
+import { DatePicker } from "zaman";
+import resolveConfig from "tailwindcss/resolveConfig";
 
 import { Task } from "@/interfaces";
 import { Button, Modal } from "@/components";
@@ -15,6 +17,7 @@ import {
   useUnCompleteTask,
   useUpdateTask,
 } from "@/api/hooks";
+import tailwindConfig from "../../tailwind.config";
 
 type Props = {
   isOpen: boolean;
@@ -28,12 +31,15 @@ const EditTaskModal = ({ isOpen, handleClose, task }: Props) => {
     register,
     handleSubmit,
     formState: { errors },
+    control,
   } = useForm<TaskModify>({ defaultValues: task });
   const updateTask = useUpdateTask();
   const deleteTask = useDeleteTask();
   const completeTask = useCompleteTask();
   const unCompleteTask = useUnCompleteTask();
   const queryClient = useQueryClient();
+
+  const fullConfig = resolveConfig(tailwindConfig);
 
   const isDesktop = useMediaQuery({
     query: "(min-width: 1025px)",
@@ -94,11 +100,20 @@ const EditTaskModal = ({ isOpen, handleClose, task }: Props) => {
         )}
       </div>
       <div>
-        <input
-          className="input"
-          type="text"
-          placeholder="سررسید"
-          {...register("dueDate")}
+        <Controller
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <DatePicker
+              accentColor={fullConfig.theme.colors.blue["700"]}
+              inputClass="input"
+              round="x2"
+              className="z-10"
+              inputAttributes={{ placeholder: "سررسید" }}
+              onChange={(e) => onChange(e.value)}
+              defaultValue={value}
+            />
+          )}
+          name="dueDate"
         />
       </div>
       <textarea
