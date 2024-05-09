@@ -49,7 +49,7 @@ const EditTaskModal = ({ isOpen, handleClose, task }: Props) => {
     try {
       await updateTask.mutateAsync({ taskId: task._id, task: data });
       toast.success("تسک با موفقیت ویرایش شد.");
-      queryClient.invalidateQueries({ queryKey: ["tasks"] }).then();
+      await queryClient.invalidateQueries({ queryKey: ["tasks"] });
       handleClose();
     } catch (error) {
       toast.error("مشکلی پیش آمده. مجددا تلاش کنید.");
@@ -65,7 +65,7 @@ const EditTaskModal = ({ isOpen, handleClose, task }: Props) => {
         await completeTask.mutateAsync(task._id);
         toast.success("تسک با موفقیت تکمیل شد.");
       }
-      queryClient.invalidateQueries({ queryKey: ["tasks"] });
+      await queryClient.invalidateQueries({ queryKey: ["tasks"] });
       handleClose();
     } catch (error) {
       toast.error("مشکلی پیش آمده. مجددا تلاش کنید.");
@@ -76,7 +76,7 @@ const EditTaskModal = ({ isOpen, handleClose, task }: Props) => {
     try {
       await deleteTask.mutateAsync(task._id);
       toast.success("تسک به سطل آشغال اضافه شد.");
-      queryClient.invalidateQueries({ queryKey: ["tasks"] });
+      await queryClient.invalidateQueries({ queryKey: ["tasks"] });
       handleClose();
     } catch (error) {
       toast.error("مشکلی پیش آمده. مجددا تلاش کنید.");
