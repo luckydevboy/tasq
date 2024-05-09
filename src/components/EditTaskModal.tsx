@@ -49,7 +49,7 @@ const EditTaskModal = ({ isOpen, handleClose, task }: Props) => {
     try {
       await updateTask.mutateAsync({ taskId: task._id, task: data });
       toast.success("تسک با موفقیت ویرایش شد.");
-      await queryClient.invalidateQueries({ queryKey: ["tasks"] });
+      queryClient.invalidateQueries({ queryKey: ["tasks"] }).then();
       handleClose();
     } catch (error) {
       toast.error("مشکلی پیش آمده. مجددا تلاش کنید.");
@@ -65,7 +65,7 @@ const EditTaskModal = ({ isOpen, handleClose, task }: Props) => {
         await completeTask.mutateAsync(task._id);
         toast.success("تسک با موفقیت تکمیل شد.");
       }
-      await queryClient.invalidateQueries({ queryKey: ["tasks"] });
+      queryClient.invalidateQueries({ queryKey: ["tasks"] });
       handleClose();
     } catch (error) {
       toast.error("مشکلی پیش آمده. مجددا تلاش کنید.");
@@ -76,7 +76,7 @@ const EditTaskModal = ({ isOpen, handleClose, task }: Props) => {
     try {
       await deleteTask.mutateAsync(task._id);
       toast.success("تسک به سطل آشغال اضافه شد.");
-      await queryClient.invalidateQueries({ queryKey: ["tasks"] });
+      queryClient.invalidateQueries({ queryKey: ["tasks"] });
       handleClose();
     } catch (error) {
       toast.error("مشکلی پیش آمده. مجددا تلاش کنید.");
@@ -100,20 +100,29 @@ const EditTaskModal = ({ isOpen, handleClose, task }: Props) => {
         )}
       </div>
       <div>
-        <Controller
-          control={control}
-          render={({ field: { onChange, value } }) => (
-            <DatePicker
-              accentColor={fullConfig.theme.colors.blue["700"]}
-              inputClass="input"
-              round="x2"
-              className="z-10"
-              inputAttributes={{ placeholder: "سررسید" }}
-              onChange={(e) => onChange(e.value)}
-              defaultValue={value}
-            />
-          )}
-          name="dueDate"
+        {/*<Controller*/}
+        {/*  control={control}*/}
+        {/*  render={({ field: { onChange, value } }) => (*/}
+        {/*    <DatePicker*/}
+        {/*      accentColor={fullConfig.theme.colors.blue["700"]}*/}
+        {/*      inputClass="input"*/}
+        {/*      round="x2"*/}
+        {/*      className="z-10"*/}
+        {/*      inputAttributes={{ placeholder: "سررسید" }}*/}
+        {/*      onChange={(e) => onChange(e.value)}*/}
+        {/*      defaultValue={value}*/}
+        {/*    />*/}
+        {/*  )}*/}
+        {/*  name="dueDate"*/}
+        {/*/>*/}
+        <DatePicker
+          accentColor={fullConfig.theme.colors.blue["700"]}
+          inputClass="input"
+          round="x2"
+          className="z-10"
+          inputAttributes={{ placeholder: "سررسید" }}
+          // onChange={(e) => onChange(e.value)}
+          // defaultValue={value}
         />
       </div>
       <textarea
