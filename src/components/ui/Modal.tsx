@@ -1,7 +1,7 @@
 "use client";
 
-import { Fragment, ReactNode } from "react";
-import { Dialog, Transition } from "@headlessui/react";
+import { Fragment, ReactNode, useRef } from "react";
+import { useClickAway } from "react-use";
 import { cx } from "class-variance-authority";
 
 type Props = {
@@ -21,49 +21,28 @@ const Modal = ({
   handleClose,
   className,
 }: Props) => {
-  return (
-    <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={handleClose}>
-        <Transition.Child
-          as={Fragment}
-          enter="ease-out duration-300"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="ease-in duration-200"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <div className="fixed inset-0 bg-black/25" />
-        </Transition.Child>
+  const ref = useRef(null);
 
-        <div className="fixed inset-0 overflow-y-auto">
-          <div className="flex min-h-full items-center justify-center p-4 text-center">
-            <Transition.Child
-              as={Fragment}
-              enter="ease-out duration-300"
-              enterFrom="opacity-0 scale-95"
-              enterTo="opacity-100 scale-100"
-              leave="ease-in duration-200"
-              leaveFrom="opacity-100 scale-100"
-              leaveTo="opacity-0 scale-95"
-            >
-              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-right align-middle shadow-xl transition-all">
-                <Dialog.Title
-                  as="h3"
-                  className="text-lg font-medium leading-6 text-gray-900"
-                >
-                  {title}
-                </Dialog.Title>
-                <Dialog.Description className={cx("mt-4", className)}>
-                  {children}
-                </Dialog.Description>
-              </Dialog.Panel>
-            </Transition.Child>
-          </div>
+  useClickAway(ref, () => {
+    handleClose();
+  });
+
+  if (isOpen) {
+    return (
+      <div>
+        <div className="fixed inset-0 bg-black/25"></div>
+        <div
+          className="bg-white fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-6 rounded-lg w-full max-w-[450px]"
+          ref={ref}
+        >
+          {title && <h1 className="text-lg font-bold mb-4">{title}</h1>}
+          {children}
         </div>
-      </Dialog>
-    </Transition>
-  );
+      </div>
+    );
+  } else {
+    return <></>;
+  }
 };
 
 export default Modal;

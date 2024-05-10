@@ -106,7 +106,7 @@ const EditTaskModal = ({ isOpen, handleClose, task }: Props) => {
             <DatePicker
               accentColor={fullConfig.theme.colors.blue["700"]}
               inputClass="input"
-              round="x2"
+              round="x1"
               className="z-10"
               inputAttributes={{ placeholder: "سررسید" }}
               onChange={(e) => onChange(e.value)}
