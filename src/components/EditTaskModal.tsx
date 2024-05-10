@@ -100,29 +100,20 @@ const EditTaskModal = ({ isOpen, handleClose, task }: Props) => {
         )}
       </div>
       <div>
-        {/*<Controller*/}
-        {/*  control={control}*/}
-        {/*  render={({ field: { onChange, value } }) => (*/}
-        {/*    <DatePicker*/}
-        {/*      accentColor={fullConfig.theme.colors.blue["700"]}*/}
-        {/*      inputClass="input"*/}
-        {/*      round="x2"*/}
-        {/*      className="z-10"*/}
-        {/*      inputAttributes={{ placeholder: "سررسید" }}*/}
-        {/*      onChange={(e) => onChange(e.value)}*/}
-        {/*      defaultValue={value}*/}
-        {/*    />*/}
-        {/*  )}*/}
-        {/*  name="dueDate"*/}
-        {/*/>*/}
-        <DatePicker
-          accentColor={fullConfig.theme.colors.blue["700"]}
-          inputClass="input"
-          round="x2"
-          className="z-10"
-          inputAttributes={{ placeholder: "سررسید" }}
-          // onChange={(e) => onChange(e.value)}
-          // defaultValue={value}
+        <Controller
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <DatePicker
+              accentColor={fullConfig.theme.colors.blue["700"]}
+              inputClass="input"
+              round="x2"
+              className="z-10"
+              inputAttributes={{ placeholder: "سررسید" }}
+              onChange={(e) => onChange(e.value)}
+              defaultValue={value}
+            />
+          )}
+          name="dueDate"
         />
       </div>
       <textarea
