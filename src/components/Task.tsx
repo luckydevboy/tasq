@@ -20,9 +20,9 @@ const Task = ({ task }: Props) => {
   const updateTask = useUpdateTask();
 
   // TODO: make a util or put it in the context
-  const handleComplete = async () => {
+  const toggleComplete = async () => {
     await updateTask.mutateAsync({
-      task: { completed: true },
+      task: { completed: !completed },
       taskId: task._id,
     });
     queryClient.invalidateQueries({ queryKey: ["tasks"] });
@@ -32,12 +32,12 @@ const Task = ({ task }: Props) => {
     <div className="flex items-center gap-x-2">
       {completed ? (
         <CheckIcon
-          onClick={handleComplete}
+          onClick={toggleComplete}
           className="w-4 h-4 text-green-700 cursor-pointer"
         />
       ) : (
         <span
-          onClick={handleComplete}
+          onClick={toggleComplete}
           className="w-4 h-4 rounded-full border-2 border-blue-700 cursor-pointer"
         ></span>
       )}
