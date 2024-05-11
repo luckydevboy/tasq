@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e32a0d5-507b-4106-83e1-1531ffda924f" name="Changes" comment="fix: click on the date picker will lead to closing the model">
+    <list default="true" id="4e32a0d5-507b-4106-83e1-1531ffda924f" name="Changes" comment="fix: toggle complete action instead of handle complete">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Task.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Task.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +46,6 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
-    "js.linters.configure.manually.selectedeslint": "true",
     "last_opened_file_path": "C:/Users/Mohammad Reza/Projects/first-app_01-hello-world",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
@@ -135,7 +134,7 @@
       <workItem from="1715284387689" duration="12416000" />
       <workItem from="1715348465948" duration="1711000" />
       <workItem from="1715372329406" duration="585000" />
-      <workItem from="1715458735320" duration="267000" />
+      <workItem from="1715458735320" duration="525000" />
     </task>
     <task id="LOCAL-00001" summary="chore: update .env.example">
       <option name="closed" value="true" />
@@ -201,7 +200,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715372687023</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="fix: toggle complete action instead of handle complete">
+      <option name="closed" value="true" />
+      <created>1715459248374</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1715459248374</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -217,6 +224,7 @@
     <MESSAGE value="feat: invent the wheal of the modal" />
     <MESSAGE value="feat: add animation for the modal" />
     <MESSAGE value="fix: click on the date picker will lead to closing the model" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: click on the date picker will lead to closing the model" />
+    <MESSAGE value="fix: toggle complete action instead of handle complete" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: toggle complete action instead of handle complete" />
   </component>
 </project>

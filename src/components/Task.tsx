@@ -14,7 +14,6 @@ type Props = {
 };
 
 const Task = ({ task }: Props) => {
-  const [completed, setCompleted] = useState(task.completed);
   const [editTaskModalIsOpen, setEditTaskModalIsOpen] = useState(false);
   const queryClient = useQueryClient();
   const updateTask = useUpdateTask();
@@ -22,15 +21,15 @@ const Task = ({ task }: Props) => {
   // TODO: make a util or put it in the context
   const toggleComplete = async () => {
     await updateTask.mutateAsync({
-      task: { completed: !completed },
+      task: { completed: !task.completed },
       taskId: task._id,
     });
-    queryClient.invalidateQueries({ queryKey: ["tasks"] });
+    await queryClient.invalidateQueries({ queryKey: ["tasks"] });
   };
 
   return (
     <div className="flex items-center gap-x-2">
-      {completed ? (
+      {task.completed ? (
         <CheckIcon
           onClick={toggleComplete}
           className="w-4 h-4 text-green-700 cursor-pointer"
