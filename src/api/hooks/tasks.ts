@@ -69,3 +69,9 @@ export const useUnCompleteTask = () => {
     mutationFn: (taskId: string) => updateTask({ completed: false }, taskId),
   });
 };
+
+export const usePurgeTask = () => {
+  return useMutation({
+    mutationFn: (taskId: string) => deleteTask(taskId),
+  });
+};

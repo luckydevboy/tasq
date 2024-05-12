@@ -22,7 +22,9 @@ const TasksList = ({ filter }: Props) => {
         </div>
       ) : (
         <div className="mt-4 space-y-4">
-          {tasks?.map((task) => <Task key={task._id} task={task} />)}
+          {tasks?.map((task) => (
+            <Task key={task._id} task={task} editable={filter !== "deleted"} />
+          ))}
         </div>
       )}
     </>

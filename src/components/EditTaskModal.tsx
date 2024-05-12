@@ -14,6 +14,7 @@ import { Button, Modal } from "@/components";
 import {
   useCompleteTask,
   useDeleteTask,
+  usePurgeTask,
   useUnCompleteTask,
   useUpdateTask,
 } from "@/api/hooks";
@@ -22,11 +23,17 @@ import tailwindConfig from "../../tailwind.config";
 type Props = {
   isOpen: boolean;
   handleClose: () => void;
+  editable?: boolean;
 } & { task: Task };
 
 type TaskModify = Omit<Task, "id">;
 
-const EditTaskModal = ({ isOpen, handleClose, task }: Props) => {
+const EditTaskModal = ({
+  isOpen,
+  handleClose,
+  task,
+  editable = true,
+}: Props) => {
   const {
     register,
     handleSubmit,
@@ -35,6 +42,7 @@ const EditTaskModal = ({ isOpen, handleClose, task }: Props) => {
   } = useForm<TaskModify>({ defaultValues: task });
   const updateTask = useUpdateTask();
   const deleteTask = useDeleteTask();
+  const purgeTask = usePurgeTask();
   const completeTask = useCompleteTask();
   const unCompleteTask = useUnCompleteTask();
   const queryClient = useQueryClient();
@@ -83,6 +91,17 @@ const EditTaskModal = ({ isOpen, handleClose, task }: Props) => {
     }
   };
 
+  const handlePurge = async () => {
+    try {
+      await purgeTask.mutateAsync(task._id);
+      toast.success("تسک با موفقیت حذف شد.");
+      await queryClient.invalidateQueries({ queryKey: ["tasks"] });
+      handleClose();
+    } catch (error) {
+      toast.error("مشکلی پیش آمده. مجددا تلاش کنید.");
+    }
+  };
+
   const renderForm = () => (
     <form
       className="grid grid-cols-1 gap-4 p-4 lg:p-0"
@@ -94,6 +113,7 @@ const EditTaskModal = ({ isOpen, handleClose, task }: Props) => {
           placeholder="عنوان"
           {...register("title", { required: "عنوان اجباری است!" })}
           className="input"
+          disabled={!editable}
         />
         {errors.title && (
           <small className="text-red-500">{errors.title.message}</small>
@@ -108,7 +128,7 @@ const EditTaskModal = ({ isOpen, handleClose, task }: Props) => {
               inputClass="input"
               round="x1"
               className="z-10"
-              inputAttributes={{ placeholder: "سررسید" }}
+              inputAttributes={{ placeholder: "سررسید", disabled: !editable }}
               onChange={(e) => onChange(e.value)}
               defaultValue={value}
             />
@@ -120,42 +140,61 @@ const EditTaskModal = ({ isOpen, handleClose, task }: Props) => {
         className="input self-stretch resize-none"
         placeholder="توضیحات"
         {...register("description")}
+        disabled={!editable}
       />
       <div className="flex justify-between mt-auto">
-        <div className="flex gap-x-2 items-center">
+        {!editable && (
           <Button
             variant="outlined"
             color="danger"
-            onClick={handleDelete}
-            isLoading={deleteTask.isPending}
+            onClick={handlePurge}
+            isLoading={purgeTask.isPending}
             type="button"
           >
             <span className="flex items-center gap-x-1">
               <TrashIcon className="text-red-700 w-4 h-4" />
-              حذف
+              حذف کامل
             </span>
           </Button>
-          <Button
-            variant="outlined"
-            color="success"
-            onClick={handleComplete}
-            isLoading={completeTask.isPending}
-            type="button"
-          >
-            <span className="flex items-center gap-x-1">
-              <CheckIcon className="text-green-700 w-4 h-4" />
-              {task.completed ? "عدم تکمیل" : "تکمیل"}
-            </span>
-          </Button>
-        </div>
-        <Button
-          variant="contained"
-          color="primary"
-          type="submit"
-          isLoading={updateTask.isPending}
-        >
-          ویرایش
-        </Button>
+        )}
+        {editable && (
+          <>
+            <div className="flex gap-x-2 items-center">
+              <Button
+                variant="outlined"
+                color="danger"
+                onClick={handleDelete}
+                isLoading={deleteTask.isPending}
+                type="button"
+              >
+                <span className="flex items-center gap-x-1">
+                  <TrashIcon className="text-red-700 w-4 h-4" />
+                  حذف
+                </span>
+              </Button>
+              <Button
+                variant="outlined"
+                color="success"
+                onClick={handleComplete}
+                isLoading={completeTask.isPending}
+                type="button"
+              >
+                <span className="flex items-center gap-x-1">
+                  <CheckIcon className="text-green-700 w-4 h-4" />
+                  {task.completed ? "عدم تکمیل" : "تکمیل"}
+                </span>
+              </Button>
+            </div>
+            <Button
+              variant="contained"
+              color="primary"
+              type="submit"
+              isLoading={updateTask.isPending}
+            >
+              ویرایش
+            </Button>
+          </>
+        )}
       </div>
     </form>
   );

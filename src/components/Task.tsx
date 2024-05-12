@@ -11,9 +11,10 @@ import { useUpdateTask } from "@/api/hooks";
 
 type Props = {
   task: Task;
+  editable: boolean;
 };
 
-const Task = ({ task }: Props) => {
+const Task = ({ task, editable }: Props) => {
   const [editTaskModalIsOpen, setEditTaskModalIsOpen] = useState(false);
   const queryClient = useQueryClient();
   const updateTask = useUpdateTask();
@@ -54,6 +55,7 @@ const Task = ({ task }: Props) => {
         task={task}
         isOpen={editTaskModalIsOpen}
         handleClose={() => setEditTaskModalIsOpen(false)}
+        editable={editable}
       />
     </div>
   );
