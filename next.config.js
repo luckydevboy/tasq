@@ -1,7 +1,3 @@
-const withPWA = require("next-pwa")({
-  dest: "public",
-});
-
-module.exports = withPWA({
-  output: "standalone",
-});
+module.exports = {
+  output: 'standalone',
+}
