@@ -5,11 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e32a0d5-507b-4106-83e1-1531ffda924f" name="Changes" comment="fix: add await for promise based methods">
+      <change afterPath="$PROJECT_DIR$/public/icons/icon-512x512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/hooks/tasks.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/hooks/tasks.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/EditTaskModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/EditTaskModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Task.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Task.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/TasksList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TasksList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.mjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/next.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vercel.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +55,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/Mohammad Reza/Projects/first-app_01-hello-world",
+    "last_opened_file_path": "C:/Users/Mohammad Reza/Projects/tasq/src/app",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
@@ -68,10 +74,12 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Mohammad Reza\Projects\tasq\src\app" />
+      <recent name="C:\Users\Mohammad Reza\Projects\tasq\public\icons" />
       <recent name="C:\Users\Mohammad Reza\Projects\tasq" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.dev">
+  <component name="RunManager" selected="npm.start">
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -104,9 +112,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
+        <item itemvalue="npm.dev" />
       </list>
     </recent_temporary>
   </component>
@@ -225,6 +233,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="chore: update .env.example" />

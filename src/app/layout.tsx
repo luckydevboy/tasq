@@ -9,6 +9,11 @@ import { NextAuthSessionProvider, ReactQueryProvider } from "@/providers";
 import { Toaster } from "react-hot-toast";
 import NextTopLoader from "nextjs-toploader";
 
+const APP_NAME = "تسکیو";
+const APP_DEFAULT_TITLE = "تسکیو";
+const APP_TITLE_TEMPLATE = "%s - تسکیو";
+const APP_DESCRIPTION = "مدیریت تسکهای روزانه";
+
 const fullConfig = resolveConfig(tailwindConfig);
 
 const dana = localFont({
@@ -17,8 +22,39 @@ const dana = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "تسکیو",
-  description: "مدیریت تسکهای روزانه",
+  applicationName: APP_NAME,
+  title: {
+    default: APP_DEFAULT_TITLE,
+    template: APP_TITLE_TEMPLATE,
+  },
+  description: APP_DESCRIPTION,
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: APP_DEFAULT_TITLE,
+    // startUpImage: [],
+  },
+  formatDetection: {
+    telephone: false,
+  },
+  openGraph: {
+    type: "website",
+    siteName: APP_NAME,
+    title: {
+      default: APP_DEFAULT_TITLE,
+      template: APP_TITLE_TEMPLATE,
+    },
+    description: APP_DESCRIPTION,
+  },
+  twitter: {
+    card: "summary",
+    title: {
+      default: APP_DEFAULT_TITLE,
+      template: APP_TITLE_TEMPLATE,
+    },
+    description: APP_DESCRIPTION,
+  },
 };
 
 export default function RootLayout({
