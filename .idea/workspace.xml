@@ -6,13 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4e32a0d5-507b-4106-83e1-1531ffda924f" name="Changes" comment="fix: add standalone output in next config">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.mjs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sw.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/sw.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sw.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/sw.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(with-layout)/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(with-layout)/layout.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

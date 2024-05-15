@@ -13,5 +13,4 @@ const withPWA = withPWAInit({
 });
 
 export default withPWA({
-  output: "standalone",
 });
